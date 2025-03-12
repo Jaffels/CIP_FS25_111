@@ -2,7 +2,7 @@
 Nhat, Merun and Johan's CIP project
 
 # Please install the following packages
-pip install openmeteo-requests
+pip install openmeteo-requests  
 pip install requests-cache retry-requests numpy pandas os
 
 # PLEASE RUN get_data.py FIRST
