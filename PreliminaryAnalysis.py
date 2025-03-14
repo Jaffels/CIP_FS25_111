@@ -2,8 +2,8 @@ from pandas import read_csv
 import pandas as pd
 import matplotlib.pyplot as plt
 
-Weather = read_csv("Data/Zurich(1990-2024).csv")
 Weather["date"] = pd.to_datetime(Weather["date"]).dt.date
+Weather = read_csv("Data/Zurich(1990-2024).csv")
 Weather = Weather.set_index("date")
 
 pd.set_option('display.max_columns', None)
