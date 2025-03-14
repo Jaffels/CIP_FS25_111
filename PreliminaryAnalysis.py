@@ -22,6 +22,14 @@ print(type(Weather.index))
 Weather.index = pd.to_datetime(Weather.index)
 print(type(Weather.index))
 
-weather_monthly = Weather.resample('ME').mean()
+weather_monthly = Weather.resample('MS').mean()
 
 print(weather_monthly.head())
+
+weather_monthly[['apparent_temperature_mean', 'wind_speed_10m_max', 'precipitation_hours']].plot(
+    figsize=(12, 6),
+    subplots=True,
+    title=['Apparent Temperature (°C)', 'Max Wind Speed (m/s)', 'Precipitation Hours']
+)
+
+plt.show()
