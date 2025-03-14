@@ -26,10 +26,23 @@ weather_monthly = Weather.resample('MS').mean()
 
 print(weather_monthly.head())
 
-weather_monthly[['apparent_temperature_mean', 'wind_speed_10m_max', 'precipitation_hours']].plot(
+weather_monthly[['apparent_temperature_mean', 'apparent_temperature_min', 'apparent_temperature_max']].plot(
     figsize=(12, 6),
     subplots=True,
-    title=['Apparent Temperature (°C)', 'Max Wind Speed (m/s)', 'Precipitation Hours']
+    title=['Mean Apparent Temperature (°C)', 'Min Apparent Temperature (°C)', 'Max Apparent Temperature (°C)']
 )
 
 plt.show()
+
+plt.plot(weather_monthly.index, weather_monthly['apparent_temperature_mean'], label="Mean Apparent Temp", color='blue')
+plt.plot(weather_monthly.index, weather_monthly['apparent_temperature_min'], label="Min Apparent Temp", color='orange')
+plt.plot(weather_monthly.index, weather_monthly['apparent_temperature_max'], label="Max Apparent Temp", color='green')
+
+plt.xlabel("Date")
+plt.ylabel("Temperature (°C)")
+plt.title("Apparent Temperatures Over Time")
+
+plt.legend()
+
+plt.show()
+
