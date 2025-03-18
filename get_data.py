@@ -1,11 +1,10 @@
-#%% md
-# 
 #%%
 import openmeteo_requests
 import requests_cache
 import pandas as pd
 from retry_requests import retry
 import os
+import time
 #%%
 cities = {"Zurich": {'loc': ["47.3769", "8.5417"]},
 		  "Seattle": {'loc': ["47.6062", "122.3321"]}}
@@ -21,7 +20,7 @@ def call_API(city, openmeteo):
 	params = {
 		"latitude": cities[city]['loc'][0],
 		"longitude": cities[city]['loc'][1],
-		"start_date": "1990-01-01",
+		"start_date": "1940-01-01",
 		"end_date": "2024-12-31",
 		"daily": ["weather_code", "temperature_2m_max", "temperature_2m_min", "temperature_2m_mean", "apparent_temperature_max", "apparent_temperature_min", "apparent_temperature_mean", "sunrise", "sunset", "daylight_duration", "sunshine_duration", "precipitation_sum", "rain_sum", "snowfall_sum", "precipitation_hours", "wind_speed_10m_max", "wind_gusts_10m_max", "wind_direction_10m_dominant", "shortwave_radiation_sum", "et0_fao_evapotranspiration"],
 		"timezone": "Europe/Berlin"
@@ -93,20 +92,21 @@ def call_API(city, openmeteo):
 	
 	return daily_dataframe
 #%%
-def save_df(data, city):
-	# Save the dataframe as csv file
-	data.to_csv(f"Data/{city}(1990-2024).csv", index = False)
-	print(f"Saved data for '{city}' successfully!")
-#%%
 def create_folder():
 	# create a data directory call Data
 	os.makedirs("Data", exist_ok=True)
 	print(f"Folder Data created successfully!")
 #%%
-def combine_dataframes(the_dict):
+def save_df(data, city):
+	# Save the dataframe as csv file
+	data.to_csv(f"Data/{city}.csv", index = False)
+	print(f"Saved data for '{city}' successfully!")
+#%%
+def combine_dataframes():
 	# Create a single dataframe from the 2 datasets
-	df1 = the_dict['Zurich']['dataframe']
-	df2 = the_dict['Seattle']['dataframe']
+	# Load the 2 datasets
+	df1 = pd.read_csv("Data/Zurich.csv")
+	df2 = pd.read_csv("Data/Seattle.csv")
 	
 	# Add a column to contains the city name
 	df1['City'] = 'Zurich'
@@ -115,17 +115,23 @@ def combine_dataframes(the_dict):
 	# Concatenate the 2 dataframes
 	start_df = pd.concat([df1, df2], ignore_index=True)
 	
+	# Write combined dataframes to csv file
 	start_df.to_csv("Data/start.csv", index = False)
 #%%
 if __name__ == "__main__":
 	create_folder()
-	
+	count = 0
 	# Call the API and save the as csv files
 	# Saving as csv files to limit the amount of calls to data provider
 	for city in cities:
 		data = call_API(city, openmeteo)
 		save_df(data, city)
-		cities[city]["dataframe"]= data
 
-	combine_dataframes(cities)
+		# Delay the 2nd api call for 2 minutes to not violate limits
+		# on api calls
+		if count < 1:
+			time.sleep(120)
+		count += 1
+
+	combine_dataframes()
 #%%

@@ -11,6 +11,8 @@ csv files that will be used throughout this exercise, as well as create
 the starting dataframe. We do this to limit the amount of calls to the 
 data provider to avoid spamming them with calls.
 
+It will take several minutes to create the final csv
+
 The load the csv file called start.csv in the Data folder to start the 
 rest of the project.
 
