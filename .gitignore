@@ -4,3 +4,5 @@ Data/
 venv/
 .cache.sqlite
 Research Question 2.txt
+clean.csv
+start.csv
