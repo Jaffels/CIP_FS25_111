@@ -2,6 +2,7 @@
 import openmeteo_requests
 import requests_cache
 import pandas as pd
+import numpy as np
 from retry_requests import retry
 import os
 import time
@@ -141,4 +142,28 @@ if __name__ == "__main__":
 		count += 1
 
 	combine_dataframes()
+#%%
+clean_df = pd.read_csv("Data/start.csv")
+#%%
+# Identify numerical columns
+numerical_cols = clean_df.select_dtypes(include=[np.number]).columns.tolist()
+#%%
+# Check for empty or all zeros columns
+empty_cols = []
+for col in numerical_cols:
+	if clean_df[col].sum() == 0:
+		empty_cols.append(col)
+#%%
+# Remove two columns with only zero values
+clean_df = clean_df.drop(empty_cols, axis=1)
+#%%
+# Get index of rows with NaN values
+nan_rows = clean_df[clean_df.isna().any(axis=1)].index.tolist()
+#%%
+clean_df = clean_df.drop(index=nan_rows, axis=0)
+#%%
+clean_df['weather_code'] = clean_df['weather_code'].astype(int)
+#%%
+# Write cleaned dataframe to csv file to limit API calls
+clean_df.to_csv("Data/clean.csv", index = False)
 #%%
