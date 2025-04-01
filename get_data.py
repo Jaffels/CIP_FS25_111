@@ -57,14 +57,15 @@ def call_API(city, openmeteo):
 	daily_wind_direction_10m_dominant = daily.Variables(17).ValuesAsNumpy()
 	daily_shortwave_radiation_sum = daily.Variables(18).ValuesAsNumpy()
 	daily_et0_fao_evapotranspiration = daily.Variables(19).ValuesAsNumpy()
-	
+
 	# Format the date variable to readable format
 	daily_data = {"date": pd.date_range(
-		start = pd.to_datetime(daily.Time(), unit = "s", utc = True),
-		end = pd.to_datetime(daily.TimeEnd(), unit = "s", utc = True),
-		freq = pd.Timedelta(seconds = daily.Interval()),
-		inclusive = "left"
-		)}
+		start=pd.to_datetime(daily.Time(), unit="s", utc=True),
+		end=pd.to_datetime(daily.TimeEnd(), unit="s", utc=True),
+		freq=pd.Timedelta(seconds=daily.Interval()),
+		inclusive="left"
+	).strftime('%Y/%m/%d')
+				  }
 	
 	# Create the pandas dataframe
 	daily_data["weather_code"] = daily_weather_code
