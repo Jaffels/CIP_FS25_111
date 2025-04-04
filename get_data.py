@@ -8,7 +8,7 @@ import time
 
 # Declare the latitude and longitude for both cities
 cities = {"Zurich": {'loc': ["47.3769", "8.5417"]},
-		  "Seattle": {'loc': ["47.6062", "122.3321"]}}
+		  "Toronto": {'loc': ["43.6532", "79.3832"]}}
 
 # Setup the Open-Meteo API client with cache and retry on error
 cache_session = requests_cache.CachedSession('.cache', expire_after = -1)
@@ -115,21 +115,17 @@ def combine_dataframes():
 	# Create a single dataframe from the 2 datasets
 	# Load the 2 datasets
 	df1 = pd.read_csv("Data/Zurich.csv")
-	df2 = pd.read_csv("Data/Seattle.csv")
+	df2 = pd.read_csv("Data/Toronto.csv")
 	
 	# Add a column to contains the city name
 	df1['City'] = 'Zurich'
-	df2['City'] = 'Seattle'
+	df2['City'] = 'Toronto'
 	
 	# Concatenate the 2 dataframes
 	start_df = pd.concat([df1, df2], ignore_index=True)
 	
 	# Write combined dataframes to csv file
 	start_df.to_csv("Data/start.csv", index = False)
-	
-	# Delete files no longer required
-	os.remove("Data/Seattle.csv")
-	os.remove("Data/Zurich.csv")
 
 def clean_dataset():
 	# Load the original dataset
