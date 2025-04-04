@@ -7,6 +7,10 @@ Weather = read_csv("Data/clean.csv")
 Weather["date"] = pd.to_datetime(Weather["date"]).dt.date
 Weather = Weather.set_index("date")
 
+### Dataframe with only Zurich data and drop City column
+Weather = Weather[Weather["City"] != "Zurich"]
+Weather = Weather.drop(['weather_code', 'City'], axis=1)
+
 pd.set_option('display.max_columns', None)
 print(Weather.info)
 print(Weather.describe)
