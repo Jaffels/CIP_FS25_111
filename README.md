@@ -27,3 +27,6 @@ start the rest of the project.
 A description of every column is contained in the
 Field_Descriptions.html file. Open the file in a webbrowser
 to view.
+
+## Google Docs link
+https://docs.google.com/document/d/1iOYDg7rNV7LiT3CZ5af6nyvBacevE4x4M34tKkmadKM/edit?usp=sharing
