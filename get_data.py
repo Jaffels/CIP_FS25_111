@@ -23,11 +23,18 @@ def call_API(city, openmeteo):
 		"longitude": cities[city]['loc'][1],
 		"start_date": "1940-01-01",
 		"end_date": "2024-12-31",
-		"daily": ["weather_code", "temperature_2m_max", "temperature_2m_min", "temperature_2m_mean", "apparent_temperature_max", "apparent_temperature_min", "apparent_temperature_mean", "sunrise", "sunset", "daylight_duration", "sunshine_duration", "precipitation_sum", "rain_sum", "snowfall_sum", "precipitation_hours", "wind_speed_10m_max", "wind_gusts_10m_max", "wind_direction_10m_dominant", "shortwave_radiation_sum", "et0_fao_evapotranspiration"],
-		"timezone": "Europe/Berlin"
+		"daily": ["weather_code", "temperature_2m_max", "temperature_2m_min", "temperature_2m_mean",
+				  "apparent_temperature_max", "apparent_temperature_min", "apparent_temperature_mean", "sunrise",
+				  "sunset", "daylight_duration", "sunshine_duration", "precipitation_sum", "rain_sum", "snowfall_sum",
+				  "precipitation_hours", "wind_speed_10m_max", "wind_gusts_10m_max", "wind_direction_10m_dominant",
+				  "shortwave_radiation_sum", "et0_fao_evapotranspiration"],
+		"timezone": cities[city].get('timezone', "Europe/Berlin"),
+		"temperature_unit": "celsius",
+		"wind_speed_unit": "kmh",
+		"precipitation_unit": "mm"
 	}
 	responses = openmeteo.weather_api(url, params=params)
-	
+
 	# Print the first part of the API response to validate the call data is valid
 	response = responses[0]
 	print(f"Coordinates {response.Latitude()}°N {response.Longitude()}°E")
