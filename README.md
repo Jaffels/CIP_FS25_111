@@ -12,16 +12,15 @@ matplotlib
 random  
 seaborn  
 
-## PLEASE RUN get_data.py FIRST
-Please run get_data.py first as this will call the api and create 
-the csv files that will be used throughout this exercise. We do 
-this to limit the amount of calls to the data provider to avoid 
-spamming them with calls.
+## PLEASE READ
+If you want to download the data yourself, you can do so by running
+the get_data.py file form your terminal. If you want to follow the
+steps of calling the API and cleaning the data, please start with 
+Johan.ipynb.
 
-It will take several minutes to create the final csv
-
-The load the csv file called clean.csv in the Data folder to 
-start the rest of the project.
+Please note that the data will take several minutes to download and
+will be saved in folder called Data that will be created during this
+process.
 
 ## Column descriptions
 A description of every column is contained in the
