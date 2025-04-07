@@ -11,7 +11,7 @@ os
 matplotlib  
 random  
 seaborn  
-
+ 
 ## PLEASE READ
 If you want to download the data yourself, you can do so by running
 the get_data.py file form your terminal. If you want to follow the
