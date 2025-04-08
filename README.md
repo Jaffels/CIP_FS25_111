@@ -16,7 +16,7 @@ seaborn
 If you want to download the data yourself, you can do so by running
 the get_data.py file form your terminal. If you want to follow the
 steps of calling the API and cleaning the data, please start with 
-Johan.ipynb.
+Group_111.ipynb.
 
 Please note that the data will take several minutes to download and
 will be saved in folder called Data that will be created during this
