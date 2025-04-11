@@ -27,10 +27,5 @@ A description of every column is contained in the
 Field_Descriptions.html file. Open the file in a web browser
 to view.
 
-## Column descriptions
-A description of every column is contained in the
-Field_Descriptions.html file. Open the file in a web browser
-to view.
-
 ## Google Docs link
 https://docs.google.com/document/d/1iOYDg7rNV7LiT3CZ5af6nyvBacevE4x4M34tKkmadKM/edit?usp=sharing
