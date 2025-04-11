@@ -1,6 +1,9 @@
 # CIP_FS25_111
 Nhat, Merun and Johan's CIP project
 
+## GitHub Repository
+https://github.com/Jaffels/CIP_FS25_111.git
+
 ## Required packages
 pip install openmeteo-requests  
 requests-cache   

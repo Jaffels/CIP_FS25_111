@@ -5,3 +5,7 @@ venv/
 .cache.sqlite
 /Compare_Zur_Sea.rtf
 /questions.ipynb
+.zip
+CIP_FS25_111/
+/cip_report_111.pdf
+/data_111/
